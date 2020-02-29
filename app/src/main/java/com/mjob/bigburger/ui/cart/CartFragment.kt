@@ -1,29 +1,34 @@
-package com.mjob.bigburger.ui.dashboard
+package com.mjob.bigburger.ui.cart
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mjob.bigburger.R
+import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class DashboardFragment : Fragment() {
+class CartFragment : DaggerFragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        cartViewModel =
+            ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        cartViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
