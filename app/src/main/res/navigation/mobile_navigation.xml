@@ -8,19 +8,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.mjob.bigburger.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="com.mjob.bigburger.ui.products.ProductsFragment"
+        android:label="@string/title_menu"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.mjob.bigburger.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.mjob.bigburger.ui.cart.CartFragment"
+        android:label="@string/title_cart"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.mjob.bigburger.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.mjob.bigburger.ui.favouriteProducts.FavouriteProductsFragment"
+        android:label="@string/title_favourite"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BigBurger</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_cart">Panier</string>
+    <string name="title_favourite">Favoris</string>
+</resources>
