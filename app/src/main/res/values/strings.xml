@@ -3,4 +3,5 @@
     <string name="title_menu">Menu</string>
     <string name="title_cart">Cart</string>
     <string name="title_favourite">Favourites</string>
+    <string name="retry">Retry</string>
 </resources>

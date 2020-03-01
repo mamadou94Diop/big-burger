@@ -31,27 +31,53 @@ class ProductsFragment : DaggerFragment() {
         productsViewModel =
             ViewModelProvider(this, viewModelFactory).get(ProductsViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_products, container, false)
+        return inflater.inflate(R.layout.fragment_products, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initListeners()
         productsViewModel.productsLiveData.observe(viewLifecycleOwner, Observer { products ->
             hideLoadingMessage()
             products?.let {
-                showDataFetched(products)
+                showDataFetched(products);
             } ?: run {
                 showErrorMessage()
             }
         })
-        return root
+
+    }
+
+      private fun initListeners() {
+          retry.setOnClickListener {
+            hideErrorMessage()
+            showLoadingMessage()
+            productsViewModel.getProducts()
+          }
+    }
+
+    private fun showLoadingMessage() {
+        loading_data_message.playAnimation()
+        loading_data_message.visibility = VISIBLE
+
     }
 
     private fun hideLoadingMessage() {
         loading_data_message.cancelAnimation()
-        loading_data_message.visibility = GONE
+        loading_data_message.visibility = INVISIBLE
 
     }
 
+    private fun hideErrorMessage() {
+        error_data_message.cancelAnimation()
+        error_data_message.visibility = INVISIBLE
+        retry.visibility = INVISIBLE
+    }
     private fun showErrorMessage() {
+        loading_data_message.playAnimation()
         error_data_message.visibility = VISIBLE
+        retry.visibility = VISIBLE
     }
 
     private fun showDataFetched(products: List<Product>) {

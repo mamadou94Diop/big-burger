@@ -12,9 +12,13 @@ class ProductsViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
-    lateinit var productsLiveData: MutableLiveData<List<Product>?>
+    var productsLiveData: MutableLiveData<List<Product>?> = MutableLiveData()
 
     init {
+        getProducts()
+    }
+
+    fun getProducts() {
         viewModelScope.launch {
             productsLiveData = productRepository.getProducts()
         }

@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
         xmlns:tools="http://schemas.android.com/tools"
@@ -21,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        app:lottie_autoPlay="true"
         app:lottie_fileName="fast-food-mobile-app-loading.json"/>
 
     <com.airbnb.lottie.LottieAnimationView
@@ -30,9 +31,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        app:lottie_autoPlay="true"
         app:lottie_fileName="fetch-data-error.json"
         android:visibility="invisible"/>
 
+    <Button
+        android:id="@+id/retry"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/cardview_light_background"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@color/colorPrimaryDark"
+        android:padding="@dimen/default_padding"
+        android:visibility="invisible"
+        android:text="@string/retry" />
 </FrameLayout>
