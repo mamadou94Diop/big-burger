@@ -74,7 +74,7 @@ class ProductsFragment : DaggerFragment(), OnAddingProductToCartListener {
             sheetView.findViewById<NumberPicker>(R.id.quantity)
 
         val addToCartButton =
-            sheetView.findViewById<Button>(R.id.add)
+            sheetView.findViewById<Button>(R.id.validate)
 
         numberPicker.minValue = 1
         numberPicker.maxValue = 100
@@ -126,6 +126,5 @@ class ProductsFragment : DaggerFragment(), OnAddingProductToCartListener {
             layoutManager = LinearLayoutManager(context)
             adapter = ProductsAdapter(products, this@ProductsFragment)
         }
-
     }
 }

@@ -48,7 +48,6 @@ class RepositoryModule {
         ).build()
     }
 
-    @Singleton
     @Provides
     fun provideCartDao(database: Database): CartDao {
         return database.cartDao()

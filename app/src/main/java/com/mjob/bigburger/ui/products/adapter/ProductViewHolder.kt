@@ -13,21 +13,21 @@ import com.mjob.bigburger.utils.loadImageFromUrl
 class ProductViewHolder(itemView: View, private val listener: OnAddingProductToCartListener) :
     RecyclerView.ViewHolder(itemView) {
     fun bindTo(product: Product) {
-        val name: TextView = itemView.findViewById(R.id.name)
+        val name: TextView = itemView.findViewById(R.id.item_quantity_label)
         name.text = product.name
 
         val thumbnail: ImageView = itemView.findViewById(R.id.thumbnail)
         thumbnail.loadImageFromUrl(product.thumbnailUrl)
 
-        val addToCart: ImageView = itemView.findViewById(R.id.add_to_cart)
+        val addToCart: ImageView = itemView.findViewById(R.id.update_cart_item)
         addToCart.setOnClickListener {
             listener.openAddProductToCartDialog(product)
         }
 
-        val description: TextView = itemView.findViewById(R.id.description)
+        val description: TextView = itemView.findViewById(R.id.quantity)
         description.text = product.description
 
-        val price: TextView = itemView.findViewById(R.id.price)
+        val price: TextView = itemView.findViewById(R.id.unit_price)
         price.displayPriceWithCurrency(product.price)
     }
 }

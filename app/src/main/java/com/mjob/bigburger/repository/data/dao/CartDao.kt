@@ -10,7 +10,7 @@ interface CartDao {
     fun insertCartItem(cartItem: CartItem)
 
     @Query("SELECT * FROM cart")
-    fun findCartItems(): List<CartItem>
+    fun findCartItems(): LiveData<List<CartItem>?>
 
     @Query("SELECT * FROM cart where reference=:ref")
     fun findCartItemByReference(ref: String): CartItem?

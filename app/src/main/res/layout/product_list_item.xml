@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="@dimen/card_elevation"
@@ -29,11 +27,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/item_quantity_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Big Mac"
+            android:textSize="@dimen/headline_size"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintLeft_toRightOf="@id/thumbnail"
             android:layout_marginStart="8dp"
@@ -41,7 +40,7 @@
 
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/quantity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -51,10 +50,10 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/thumbnail"
-            app:layout_constraintTop_toBottomOf="@id/name" />
+            app:layout_constraintTop_toBottomOf="@id/item_quantity_label" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/unit_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12,5€"
@@ -62,10 +61,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintLeft_toRightOf="@id/thumbnail"
-            app:layout_constraintTop_toBottomOf="@id/description"/>
+            app:layout_constraintTop_toBottomOf="@id/quantity"/>
 
         <ImageView
-            android:id="@+id/add_to_cart"
+            android:id="@+id/update_cart_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

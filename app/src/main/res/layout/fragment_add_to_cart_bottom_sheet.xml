@@ -14,7 +14,7 @@
     </NumberPicker>
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -22,5 +22,5 @@
         android:layout_margin="@dimen/default_margin"
         android:background="@color/colorPrimary"
         android:textColor="@color/cardview_light_background"
-        android:text="Add" />
+        android:text="@string/validate" />
 </LinearLayout>
