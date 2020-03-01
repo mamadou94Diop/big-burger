@@ -7,7 +7,10 @@ import com.mjob.bigburger.BuildConfig
 import com.mjob.bigburger.repository.api.ProductRepository
 import com.mjob.bigburger.repository.api.implementation.ProductApiService
 import com.mjob.bigburger.repository.api.implementation.RemoteProductRepository
+import com.mjob.bigburger.repository.data.CartRepository
 import com.mjob.bigburger.repository.data.Database
+import com.mjob.bigburger.repository.data.dao.CartDao
+import com.mjob.bigburger.repository.data.implementation.LocalCartRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -37,6 +40,23 @@ class RepositoryModule {
 
     @Singleton
     @Provides
+    fun provideRoomDatabase(context: Context): Database {
+        val databaseName = "big_burger_database"
+        return Room.databaseBuilder<Database>(
+            context.applicationContext, Database::class.java,
+            databaseName
+        ).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCartDao(database: Database): CartDao {
+        return database.cartDao()
+    }
+
+
+    @Singleton
+    @Provides
     fun providePictureApiService(retrofit: Retrofit): ProductApiService {
         return retrofit.create(ProductApiService::class.java)
     }
@@ -51,12 +71,12 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRoomDatabase(context: Context): Database {
-        val databaseName = "big_burger_database"
-        return Room.databaseBuilder<Database>(
-            context.applicationContext, Database::class.java,
-            databaseName
-        ).build()
+    fun provideLocalCartRepository(
+        cartDao: CartDao
+    ): CartRepository {
+        return LocalCartRepository(cartDao)
     }
+
+
 }
 

@@ -5,14 +5,17 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "cart")
-data class CartItem (
+data class CartItem(
     @PrimaryKey
     @ColumnInfo(name = "reference")
     val reference: String,
 
     @ColumnInfo(name = "name")
-    val name : String,
+    val name: String,
+
+    @ColumnInfo(name = "price")
+    val price: Int,
 
     @ColumnInfo(name = "quantity")
-    val quantity:  Int
+    var quantity: Int
 )

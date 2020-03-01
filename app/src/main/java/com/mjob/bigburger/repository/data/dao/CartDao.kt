@@ -1,16 +1,19 @@
 package com.mjob.bigburger.repository.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.mjob.bigburger.repository.data.entities.CartItem
 
 @Dao
 interface CartDao {
+    @Insert
+    fun insertCartItem(cartItem: CartItem)
+
     @Query("SELECT * FROM cart")
-    fun getCartIms(): LiveData<CartItem>
+    fun findCartItems(): List<CartItem>
+
+    @Query("SELECT * FROM cart where reference=:ref")
+    fun findCartItemByReference(ref: String): CartItem?
 
     @Delete
     fun deleteCartItem(cartItem: CartItem)

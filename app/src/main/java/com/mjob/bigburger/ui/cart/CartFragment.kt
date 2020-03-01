@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mjob.bigburger.R
 import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_cart.*
 import javax.inject.Inject
 
 class CartFragment : DaggerFragment() {
@@ -26,11 +26,15 @@ class CartFragment : DaggerFragment() {
     ): View? {
         cartViewModel =
             ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        cartViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+
+        return inflater.inflate(R.layout.fragment_cart, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cartViewModel.cartItemsLiveData.observe(viewLifecycleOwner, Observer { cartItems ->
+
         })
-        return root
+
     }
 }

@@ -26,7 +26,7 @@ class FavouriteProductsFragment : DaggerFragment() {
     ): View? {
         favouriteProductsViewModel =
             ViewModelProvider(this, viewModelFactory).get(FavouriteProductsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val root = inflater.inflate(R.layout.fragment_favourites, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
         favouriteProductsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

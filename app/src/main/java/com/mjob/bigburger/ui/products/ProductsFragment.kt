@@ -3,11 +3,15 @@ package com.mjob.bigburger.ui.products
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.NumberPicker
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mjob.bigburger.R
 import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
 import com.mjob.bigburger.repository.api.model.Product
@@ -15,11 +19,13 @@ import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_ERROR
 import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_LOADING
 import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_SUCCESS
 import com.mjob.bigburger.ui.products.adapter.ProductsAdapter
+import com.mjob.bigburger.ui.products.contract.OnAddingProductToCartListener
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_products.*
 import javax.inject.Inject
 
-class ProductsFragment : DaggerFragment() {
+
+class ProductsFragment : DaggerFragment(), OnAddingProductToCartListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -59,6 +65,31 @@ class ProductsFragment : DaggerFragment() {
 
     }
 
+    override fun openAddProductToCartDialog(product: Product) {
+        val bottomSheetDialog = BottomSheetDialog(activity!!)
+        val sheetView: View =
+            activity!!.layoutInflater.inflate(R.layout.fragment_add_to_cart_bottom_sheet, null)
+
+        val numberPicker =
+            sheetView.findViewById<NumberPicker>(R.id.quantity)
+
+        val addToCartButton =
+            sheetView.findViewById<Button>(R.id.add)
+
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 100
+
+        addToCartButton.setOnClickListener {
+            productsViewModel.addProductToCart(product, numberPicker.value)
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetDialog.setContentView(sheetView)
+
+        bottomSheetDialog.show()
+
+    }
+
     private fun initListeners() {
         retry.setOnClickListener {
             productsViewModel.getProducts()
@@ -93,7 +124,7 @@ class ProductsFragment : DaggerFragment() {
         productsRecyclerView.visibility = VISIBLE
         productsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ProductsAdapter(products)
+            adapter = ProductsAdapter(products, this@ProductsFragment)
         }
 
     }

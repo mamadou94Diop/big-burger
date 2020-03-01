@@ -5,4 +5,5 @@
     <string name="title_cart">Panier</string>
     <string name="title_favourite">Favoris</string>
     <string name="retry">Réessayer</string>
+    <string name="cart_total">Total:</string>
 </resources>
