@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mjob.bigburger.R
 import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
 import com.mjob.bigburger.repository.api.model.Product
+import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_ERROR
+import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_LOADING
+import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_SUCCESS
 import com.mjob.bigburger.ui.products.adapter.ProductsAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -36,25 +39,30 @@ class ProductsFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initListeners()
-        productsViewModel.productsLiveData.observe(viewLifecycleOwner, Observer { products ->
-            hideLoadingMessage()
-            products?.let {
-                showDataFetched(products);
-            } ?: run {
-                showErrorMessage()
+        productsViewModel.productsLiveData.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource.status) {
+                STATUS_LOADING -> {
+                    hideErrorMessage()
+                    showLoadingMessage()
+                }
+                STATUS_ERROR -> {
+                    hideLoadingMessage()
+                    showErrorMessage()
+                }
+                STATUS_SUCCESS -> {
+                    hideLoadingMessage()
+                    showDataFetched(resource.data!!)
+                }
             }
         })
 
     }
 
-      private fun initListeners() {
-          retry.setOnClickListener {
-            hideErrorMessage()
-            showLoadingMessage()
+    private fun initListeners() {
+        retry.setOnClickListener {
             productsViewModel.getProducts()
-          }
+        }
     }
 
     private fun showLoadingMessage() {
@@ -74,6 +82,7 @@ class ProductsFragment : DaggerFragment() {
         error_data_message.visibility = INVISIBLE
         retry.visibility = INVISIBLE
     }
+
     private fun showErrorMessage() {
         loading_data_message.playAnimation()
         error_data_message.visibility = VISIBLE

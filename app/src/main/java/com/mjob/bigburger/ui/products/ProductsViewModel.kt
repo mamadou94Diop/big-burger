@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mjob.bigburger.repository.api.ProductRepository
 import com.mjob.bigburger.repository.api.model.Product
+import com.mjob.bigburger.repository.common.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -12,7 +13,7 @@ class ProductsViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
-    var productsLiveData: MutableLiveData<List<Product>?> = MutableLiveData()
+    var productsLiveData: MutableLiveData<Resource<List<Product>?>> = MutableLiveData()
 
     init {
         getProducts()
