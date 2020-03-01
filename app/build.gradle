@@ -10,12 +10,12 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
 android {
-    compileSdkVersion APP_COMPILE_SDK_VERSION
-    buildToolsVersion APP_BUILD_TOOLS_VERSION
+    compileSdkVersion app_compile_sdk_version
+    buildToolsVersion app_build_tools_version
     defaultConfig {
         applicationId "com.mjob.bigburger"
-        minSdkVersion APP_MIN_SDK_VERSION
-        targetSdkVersion APP_TARGET_SDK_VERSION
+        minSdkVersion app_min_sdk_version
+        targetSdkVersion app_target_sdk_version
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -77,7 +77,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version"
 
-
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
     androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
     androidTestImplementation "org.mockito:mockito-core:2.25.0"

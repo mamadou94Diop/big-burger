@@ -6,13 +6,13 @@ class Product(
     @SerializedName("ref")
     val reference: String,
 
-    @SerializedName("name")
+    @SerializedName("title")
     val name: String,
 
     @SerializedName("description")
     val description: String,
 
-    @SerializedName("thumbnailUrl")
+    @SerializedName("thumbnail")
     val thumbnailUrl: String,
 
     @SerializedName("price")
