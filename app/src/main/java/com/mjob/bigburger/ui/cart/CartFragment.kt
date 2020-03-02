@@ -16,13 +16,13 @@ import com.mjob.bigburger.R
 import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
 import com.mjob.bigburger.repository.data.entities.CartItem
 import com.mjob.bigburger.ui.cart.adapter.CartItemAdapter
-import com.mjob.bigburger.ui.cart.contract.OnUpdatingCartItemListener
+import com.mjob.bigburger.ui.cart.contract.CartItemEventListener
 import com.mjob.bigburger.utils.displayPriceWithCurrency
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_cart.*
 import javax.inject.Inject
 
-class CartFragment : DaggerFragment(), OnUpdatingCartItemListener {
+class CartFragment : DaggerFragment(), CartItemEventListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -46,7 +46,7 @@ class CartFragment : DaggerFragment(), OnUpdatingCartItemListener {
         updateUI()
     }
 
-    override fun openUpdateCartItemDialog(cartItem: CartItem) {
+    override fun onUpdate(cartItem: CartItem) {
         val bottomSheetDialog = BottomSheetDialog(activity!!)
         val sheetView: View =
             activity!!.layoutInflater.inflate(R.layout.fragment_add_to_cart_bottom_sheet, null)
@@ -73,8 +73,12 @@ class CartFragment : DaggerFragment(), OnUpdatingCartItemListener {
 
         bottomSheetDialog.setContentView(sheetView)
 
-        bottomSheetDialog.show()
+        bottomSheetDialog.show()    }
+
+    override fun onDelete(cartItem: CartItem) {
+        cartViewModel.deleteCartItem(cartItem)
     }
+
 
     private fun updateUI()
     {

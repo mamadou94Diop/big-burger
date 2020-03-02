@@ -20,16 +20,21 @@ class CartViewModel @Inject constructor(
         getCartItems()
     }
 
-    fun getCartItems() {
+    private fun getCartItems() {
         viewModelScope.launch {
-            cartItemsLiveData = cartRepository.getCartItems()
-            Log.d("cartViewModel",cartItemsLiveData.value?.size.toString())
+            cartItemsLiveData = cartRepository.get()
         }
     }
 
     fun updateCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             cartRepository.update(cartItem)
+        }
+    }
+
+    fun deleteCartItem(cartItem: CartItem) {
+        viewModelScope.launch {
+            cartRepository.delete(cartItem)
         }
     }
 }

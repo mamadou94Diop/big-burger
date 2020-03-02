@@ -28,11 +28,17 @@ class LocalCartRepository @Inject constructor(private val dao: CartDao) : CartRe
 
     }
 
-    override  fun getCartItems(): LiveData<List<CartItem>?> = dao.findCartItems()
+    override  fun get(): LiveData<List<CartItem>?> = dao.findCartItems()
 
     override suspend fun update(cartItem: CartItem) {
         CoroutineScope(Dispatchers.IO).launch {
             dao.updateCartItem(cartItem)
+        }
+    }
+
+    override suspend fun delete(cartItem: CartItem) {
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.deleteCartItem(cartItem)
         }
     }
 
