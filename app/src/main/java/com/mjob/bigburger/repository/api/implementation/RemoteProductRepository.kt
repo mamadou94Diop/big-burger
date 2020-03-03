@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class RemoteProductRepository @Inject constructor(private val productApiService: ProductApiService) :
     ProductRepository {
-    override fun getProducts(): MutableLiveData<Resource<List<Product>?>> {
+    override fun get(): MutableLiveData<Resource<List<Product>?>> {
         val products: MutableLiveData<Resource<List<Product>?>> = MutableLiveData()
         products.postValue(Resource(STATUS_LOADING, null, null))
 

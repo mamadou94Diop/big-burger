@@ -23,7 +23,7 @@ class ProductsViewModel @Inject constructor(
 
     fun getProducts() {
         viewModelScope.launch {
-            productsLiveData = productRepository.getProducts()
+            productsLiveData = productRepository.get()
         }
     }
 
