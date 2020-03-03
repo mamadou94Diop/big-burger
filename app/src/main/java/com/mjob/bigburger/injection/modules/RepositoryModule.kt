@@ -11,6 +11,7 @@ import com.mjob.bigburger.repository.data.CartRepository
 import com.mjob.bigburger.repository.data.Database
 import com.mjob.bigburger.repository.data.dao.CartDao
 import com.mjob.bigburger.repository.data.implementation.LocalCartRepository
+import com.mjob.bigburger.utils.CoroutineContextProvider
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -53,6 +54,10 @@ class RepositoryModule {
         return database.cartDao()
     }
 
+    @Singleton
+    @Provides
+    fun provideCoroutineContextProvider() = CoroutineContextProvider()
+
 
     @Singleton
     @Provides
@@ -71,9 +76,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideLocalCartRepository(
-        cartDao: CartDao
+        cartDao: CartDao,
+        coroutineContextProvider: CoroutineContextProvider
     ): CartRepository {
-        return LocalCartRepository(cartDao)
+        return LocalCartRepository(cartDao, coroutineContextProvider)
     }
 
 

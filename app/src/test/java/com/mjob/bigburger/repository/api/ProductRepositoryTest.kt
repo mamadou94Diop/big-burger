@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mjob.bigburger.repository.api.implementation.ProductApiService
 import com.mjob.bigburger.repository.api.implementation.RemoteProductRepository
 import com.mjob.bigburger.repository.api.model.Product
-import com.mjob.bigburger.repository.common.Resource
+import com.nhaarman.mockitokotlin2.any
 import okhttp3.ResponseBody
 import org.junit.Before
 import org.junit.Rule
@@ -70,7 +70,7 @@ class ProductRepositoryTest {
             val callback: Callback<List<Product>> = invocation.getArgument(0)
             callback.onResponse(mockProductCall, Response.error(500, mockResponseBody))
 
-        }.`when`(mockProductCall).enqueue(Mockito.any())
+        }.`when`(mockProductCall).enqueue(any())
 
         val result = productRepository.get().value
         assert(result!!.isError())
@@ -78,14 +78,14 @@ class ProductRepositoryTest {
     }
 
     @Test
-    fun given_a_cart_item_when_this_cart_item_does_nokkt_exist_in_database_then_insert_it() {
+    fun given_a_cart_item_when_this_cart_item_does_not_exist_in_database_then_insert_it() {
         Mockito.`when`(mockProductApiService.getProducts()).thenReturn(mockProductCall)
 
         Mockito.doAnswer { invocation ->
             val callback: Callback<List<Product>> = invocation.getArgument(0)
             callback.onFailure(mockProductCall,  Exception("Network Error"))
 
-        }.`when`(mockProductCall).enqueue(Mockito.any())
+        }.`when`(mockProductCall).enqueue(any())
 
         val result = productRepository.get().value
         assert(result!!.isError())
