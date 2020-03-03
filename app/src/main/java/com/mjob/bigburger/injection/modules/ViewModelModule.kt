@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.mjob.bigburger.injection.viewmodel.ViewModelFactory
 import com.mjob.bigburger.injection.viewmodel.ViewModelKey
 import com.mjob.bigburger.ui.cart.CartViewModel
-import com.mjob.bigburger.ui.favouriteProducts.FavouriteProductsViewModel
 import com.mjob.bigburger.ui.products.ProductsViewModel
 import dagger.Binds
 import dagger.Module
@@ -26,9 +25,4 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CartViewModel::class)
     internal abstract fun bindCartViewModel(cartViewModel: CartViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(FavouriteProductsViewModel::class)
-    internal abstract fun bindFavouriteProductsViewModel(favouriteProductsViewModel: FavouriteProductsViewModel): ViewModel
 }

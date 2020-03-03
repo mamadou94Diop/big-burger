@@ -7,13 +7,8 @@
         android:title="@string/title_menu" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_action_cart"
         android:title="@string/title_cart" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/title_favourite" />
 
 </menu>

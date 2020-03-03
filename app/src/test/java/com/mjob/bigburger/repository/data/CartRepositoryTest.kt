@@ -19,9 +19,9 @@ class CartRepositoryTest {
     @Mock
     lateinit var mockDao: CartDao
 
-    lateinit var testCoroutineContextProvider: TestCoroutineContextProvider
+    private lateinit var testCoroutineContextProvider: TestCoroutineContextProvider
 
-    lateinit var cartRepository: CartRepository
+    private lateinit var cartRepository: CartRepository
 
 
     @get:Rule

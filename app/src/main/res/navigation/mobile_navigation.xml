@@ -13,14 +13,9 @@
         tools:layout="@layout/fragment_products" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_cart"
         android:name="com.mjob.bigburger.ui.cart.CartFragment"
         android:label="@string/title_cart"
         tools:layout="@layout/fragment_cart" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.mjob.bigburger.ui.favouriteProducts.FavouriteProductsFragment"
-        android:label="@string/title_favourite"
-        tools:layout="@layout/fragment_favourites" />
 </navigation>

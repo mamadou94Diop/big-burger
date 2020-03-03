@@ -27,7 +27,7 @@ class ProductRepositoryTest {
     @Mock
     lateinit var mockResponseBody: ResponseBody
 
-    lateinit var productRepository: ProductRepository
+    private lateinit var productRepository: ProductRepository
 
     @get:Rule
     val rule = InstantTaskExecutorRule()

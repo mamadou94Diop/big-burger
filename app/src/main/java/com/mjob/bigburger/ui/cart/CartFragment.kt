@@ -20,6 +20,7 @@ import com.mjob.bigburger.ui.cart.contract.CartItemEventListener
 import com.mjob.bigburger.utils.displayPriceWithCurrency
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.layout_cart_empty.*
 import javax.inject.Inject
 
 class CartFragment : DaggerFragment(), CartItemEventListener {
@@ -84,17 +85,25 @@ class CartFragment : DaggerFragment(), CartItemEventListener {
     {
         cartViewModel.cartItemsLiveData.observe(viewLifecycleOwner, Observer { cartItems ->
             if (cartItems.isNullOrEmpty()) {
-                showEmptyCart()
+                showEmptyCartMessage()
             } else {
+                hideEmptyCartMessage()
                 showDataFetched(cartItems)
                 calculateTotal(cartItems)
             }
         })
     }
-    private fun showEmptyCart() {
+    private fun showEmptyCartMessage() {
         layoutCartEmpty.visibility= VISIBLE
+        empty_cart_message.playAnimation()
         layoutCartItems.visibility= INVISIBLE
     }
+
+    private fun hideEmptyCartMessage() {
+        empty_cart_message.cancelAnimation()
+        layoutCartEmpty.visibility = INVISIBLE
+    }
+
 
     private fun calculateTotal(cartItems: List<CartItem>) {
         val total = cartItems.sumBy { (it.price * it.quantity) }
@@ -103,7 +112,6 @@ class CartFragment : DaggerFragment(), CartItemEventListener {
     }
 
     private fun showDataFetched(cartItems: List<CartItem>) {
-        layoutCartEmpty.visibility= INVISIBLE
         layoutCartItems.visibility= VISIBLE
 
         if (cartItemAdapter == null){

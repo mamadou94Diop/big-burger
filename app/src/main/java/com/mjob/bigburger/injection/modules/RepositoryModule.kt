@@ -54,6 +54,7 @@ class RepositoryModule {
         return database.cartDao()
     }
 
+
     @Singleton
     @Provides
     fun provideCoroutineContextProvider() = CoroutineContextProvider()
@@ -81,6 +82,7 @@ class RepositoryModule {
     ): CartRepository {
         return LocalCartRepository(cartDao, coroutineContextProvider)
     }
+
 
 
 }

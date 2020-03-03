@@ -3,7 +3,6 @@
     <string name="app_name">BigBurger</string>
     <string name="title_menu">Menu</string>
     <string name="title_cart">Panier</string>
-    <string name="title_favourite">Favoris</string>
     <string name="retry">Réessayer</string>
     <string name="cart_total">Total:</string>
     <string name="item">Article:</string>
@@ -12,6 +11,5 @@
     <string name="sub_total">Sous total:</string>
     <string name="validate">Valider</string>
     <string name="order">Commander</string>
-    <string name="cart_is_empty">Le panier est vide</string>
 
 </resources>

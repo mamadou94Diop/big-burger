@@ -4,9 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.mjob.bigburger.repository.api.ProductRepository
 import com.mjob.bigburger.repository.api.model.Product
 import com.mjob.bigburger.repository.common.Resource
-import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_ERROR
-import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_LOADING
-import com.mjob.bigburger.repository.common.Resource.Companion.STATUS_SUCCESS
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +14,7 @@ class RemoteProductRepository @Inject constructor(private val productApiService:
     ProductRepository {
     override fun get(): MutableLiveData<Resource<List<Product>?>> {
         val products: MutableLiveData<Resource<List<Product>?>> = MutableLiveData()
-        products.postValue(Resource(STATUS_LOADING, null, null))
+        products.postValue(Resource.loading(null))
 
         productApiService.getProducts()
             .enqueue(object : Callback<List<Product>> {
@@ -27,15 +24,15 @@ class RemoteProductRepository @Inject constructor(private val productApiService:
                 ) {
                     if (response.isSuccessful) {
                         if (response.isSuccessful) {
-                            products.postValue(Resource(STATUS_SUCCESS, response.body(), null))
+                            products.postValue(Resource.success(response.body()))
                         }
                     } else {
-                        products.postValue(Resource(STATUS_ERROR, null, null))
+                        products.postValue(Resource.error(null))
                     }
                 }
 
                 override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                    products.postValue(Resource(STATUS_ERROR, null, null))
+                    products.postValue(Resource.error(null))
                 }
             })
         return products
